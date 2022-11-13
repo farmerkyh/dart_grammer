@@ -16,12 +16,9 @@
      async함수에서 try-catch를 사용해서 에러를 잡는다.
   d. async await
   e. async <-> return Future<> : 일회성 응답에 사용
-*/
- 
+
 
 2. Stram
-
-
 1. 일반 Stream
    1.1 Future는 단일 data하나를 처리 한다면, stream은 data를 여러게(List) 처리 한다.
    1.2 일반 Stream은 한개의 Listener만 가질 수 있다.
@@ -41,7 +38,7 @@
  
 참고 URL : https://beomseok95.tistory.com/308
           https://www.youtube.com/watch?v=AKOUDHZsBP0
-*/
+
  
 import 'dart:async';
 Stream<int> countSream(int to) async* {
