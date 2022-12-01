@@ -1,6 +1,6 @@
 ```dart
 void main() {
-  //강의:https://www.inflearn.com/course/dart-%EC%96%B8%EC%96%B4-%EC%9E%85%EB%AC%B8/unit/107632
+  //강의:https://www.inflearn.com/course/dart-언어-입문/unit/107632
    
   //1. Map 활용편
   mapStudy();
@@ -25,28 +25,50 @@ void main() {
  
 //----------------------------------------------------------------------
 //1. Map 활용편
+//   - key값을 기준으로 중복허용하지 않는다.
 //----------------------------------------------------------------------
 void mapStudy() {
-  Map<String, String> harryPotter = {
-    'Harry':'해리', 'Ron':'론','Hermione':'헤르미온느'};
+
+  Map<String, String> harryPotter = {'Harry':'해리', 'Ron':'론','Hermione':'헤르미온느'};
    
-  //1.1. Map을 다른 Map으로 변환
+  //1.1. Map.map() : Map을 순환한다. (looping)
   final result = harryPotter.map(
-    (key,value) => MapEntry('$key Potter', '$value 캐릭터'),
-  );
-   
+                       (key,value) => MapEntry('$key Potter', '$value 캐릭터'),
+                  );
   print(result);
   //{Harry Potter: 해리 캐릭터, Ron Potter: 론 캐릭터, Hermione Potter: 헤르미온느 캐릭터}
    
-  //1.2. key값을 추출 후 
-  final keys1 = harryPotter.keys; //a. iterator로 얻기
-  final keys2 = harryPotter.keys.map((x)=>'$x Chacrator');  //b.
-  final keys3 = harryPotter.keys.map((x)=>'$x Chacrator').toList(); //c. List로 얻기
+  //1.2. Map.key : key값을 추출 후 
+  final keys1 = harryPotter.keys; //a. Map에서 key만 iterator로 얻기
+  final keys2 = harryPotter.keys.map((x)=>'$x Chacrator');  //b. Map에서 key만 map()으로 looping하기
+  final keys3 = harryPotter.keys.map((x)=>'$x Chacrator').toList(); //c. Map에서 key만 List로 만들기
+
   print(keys1); //(Harry, Ron, Hermione)
   print(keys2); //(Harry Chacrator, Ron Chacrator, Hermione Chacrator)
   print(keys3); //[Harry Chacrator, Ron Chacrator, Hermione Chacrator]
    
-  //1.3 values값을 이용해서 interator, List등으로 얻기 (위 key값 방법과 동일)  
+  //1.3 Map.values : values값을 이용해서 interator, List등으로 얻기 
+  //harryPotter.values -> (위 Map.key 문법과 동일)  
+
+  //1.4 Map.entries : Map을 for 로 수행하여 모든 key,value얻기
+  //    harryPotter.map()과 동일 방식이지만,  
+  //    harryPotter.map()문법이 flutter에서 개발도중 적용이 안되는 경우에 harryPotter.entries를 적용하면 된다.
+  for (var element in harryPotter.entries) {
+    print('key=${element.key},  value=${element.value}');
+  }
+
+  //1.5 Map.from() : Map복사 (harryPotter와 harryCopy는 다른 객체로 인식한다.)
+  Map<String, String>  harryCopy = Map.from(harryPotter);
+  harryCopy['Farmer'] = '농부';
+
+  //1.6 addAll() : 기존Map에 다른 Map을 추가한다.
+  //             : 참고, 반드시 Map<String, String> 이와 같은 type으로 정의 해야 된다.
+  //             : var type과 같은 dynamic type으로 정의시 addAll()문법에서 오류가 발생할 수 있다.
+  //var twoHarry = {}..addAll(harryPotter)..addAll(harryCopy);
+  //harryPotter.addAll({'Farmer':'농부'});
+  harryPotter..addAll(harryCopy);
+
+
 }
  
 //----------------------------------------------------------------------
