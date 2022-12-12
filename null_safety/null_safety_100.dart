@@ -1,5 +1,13 @@
 
 /*
+ 연산자  사용예          의미
+  ??     A=B??C      B가 null이 아니면 B를, Null이라면 C를 A에 넣는다
+  ??=    A ??=B      A가 null이면 A에 B를 넣는다.
+  ?.     A?.text()   A가 null이 아니면 test()를 실행한다.
+  !      A!          A가 null이 아님을 약속한다.
+  ...?   [0,...?A]   A가 null이더라도 exception을 발생하지 않음
+
+
  0. Dart기본
     - Dart 에서 모든 변수는 객체이다. 
     - 변수를 선언하면서 초기값을 주지 않으면 null 로 자동 초기화 된다
